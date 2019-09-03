@@ -1,11 +1,24 @@
+# Práctica 1
+Este es el archivo README de la práctica 3.
+En este repositorio se encuentran los ejercicios:
 
+### Prerequisitos
+NLTK
 
+### Instalar
+*For NLTK with pip:
+	> pip install nltk
 
-#
-In python console: 
+*In python console: 
 	>>> import nltk
-	>>> nltk.download()
-	
-	Then an installation window appears. 
-	Go to the 'Models' tab and select 'punkt' from under the 'Identifier' column. 
-	Then click Download and it will install the necessary files. 
+	>>> nltk.download('punkt')
+	>>> nltk.download('stopwords')
+
+### Ejecutar Ejercicios en consola
+*Ejercicio 3.1 (Se requiere que ingrese un número entero)
+python sumarNumeros.py 
+
+## Autor
+* **Diana Rocha Botello** - *Práctica 1* - [Repositorio](https://github.com/dianarobot)
+
+ 
