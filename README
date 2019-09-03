@@ -1,6 +1,9 @@
-# Práctica 1
+# Práctica 3
 Este es el archivo README de la práctica 3.
 En este repositorio se encuentran los ejercicios:
+*Distancia de Hamming
+*Análisis de Frecuencias
+*Corrector Ortográfico (PENDIENTE DE IMPLEMENTACIÓN)
 
 ### Prerequisitos
 NLTK
@@ -15,8 +18,8 @@ NLTK
 	>>> nltk.download('stopwords')
 
 ### Ejecutar Ejercicios en consola
-*Ejercicio 3.1 (Se requiere que ingrese un número entero)
-python sumarNumeros.py 
+
+python AnalisisFrecuencias.py
 
 ## Autor
 * **Diana Rocha Botello** - *Práctica 1* - [Repositorio](https://github.com/dianarobot)
