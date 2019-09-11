@@ -5,6 +5,7 @@
 """
 import nltk
 import collections
+import string
 from nltk.tokenize.toktok import ToktokTokenizer
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
@@ -51,9 +52,19 @@ class AnalisisFrecuencia():
 		print("Número de Tokens Antes de la Reducción: "+str(len(self.tokenList)))
 		for stopWord in stopwords.words("spanish"):
 			for token in self.tokenList:
-				if stopWord == token:
+				if stopWord == token.lower() or token in string.punctuation or token in ['¿','¡', '——']:
 					self.tokenList.remove(token)
 		print("Número de Tokens Después de la Reducción: "+str(len(self.tokenList)))
+
+	def reduccionDimensionalidadBySentence(self):
+		for stopWord in stopwords.words("spanish"):
+			i=0
+			for sentence in self.tokenListbySentence:
+				for token in sentence:
+					if stopWord == token.lower() or token in string.punctuation or token in ['¿','¡', '——']:
+						self.tokenListbySentence[i].remove(token)
+				i+=1
+		print(self.tokenListbySentence)
 
 	def distribucionFrecuenciasStemming(self):
 		stemmer = SnowballStemmer("spanish")
@@ -83,6 +94,16 @@ class AnalisisFrecuencia():
 			#print(self.lematizacionD)
 			f.close()
 
+	def getLematizacionDiccionarioSimple(self):
+		with open('lemmatization-es.txt', 'r', encoding='utf8') as f:
+			key = ''
+			values = []
+			for line in f:
+				l = line.split()
+				self.lematizacionD.update({l[1]:l[0]})
+			#print(self.lematizacionD)
+			f.close()
+
 	def distribucionFrecuenciasLematizacion(self):
 		self.getLematizacionDiccionario()
 		lematizado = False
@@ -93,6 +114,17 @@ class AnalisisFrecuencia():
 					self.tokenListLemmati.append(key)
 					lematizado = True
 			if lematizado == False:
+				self.tokenListLemmati.append(token)
+		#print(self.tokenListLemmati)
+		self.distribucionFrecuencias(self.tokenListLemmati)
+
+	def distribucionFrecuenciasLematizacionSimple(self):
+		self.getLematizacionDiccionarioSimple()
+		for token in self.tokenList:
+			diccionarioRaiz = self.lematizacionD.get(token.lower(), -1)
+			if diccionarioRaiz != -1:
+				self.tokenListLemmati.append(diccionarioRaiz)
+			else:
 				self.tokenListLemmati.append(token)
 		#print(self.tokenListLemmati)
 		self.distribucionFrecuencias(self.tokenListLemmati)
@@ -117,5 +149,5 @@ if __name__ == "__main__":
 	print("-----------------------------------------------")
 	input("Press Enter to continue...")
 	print("Distribución de frecuencias Lematización practica3.txt")
-	a.distribucionFrecuenciasLematizacion()
+	a.distribucionFrecuenciasLematizacionSimple()
 	print("-----------------------------------------------")
